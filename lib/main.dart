@@ -6,7 +6,7 @@ import 'firebase_options.dart';
 import 'pages/dashboard_page.dart';
 import 'pages/login_page.dart';
 import 'pages/pending_driver_rides.dart';
-import 'pages/pending_users.dart';
+import 'pages/pending_accounts_list.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

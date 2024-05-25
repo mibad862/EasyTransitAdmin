@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easytransit_admin/common_widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 
 class PendingUsers extends StatelessWidget {
@@ -9,15 +10,15 @@ class PendingUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Pending Users List"),
+      appBar: CommonAppBar(
+        title: "Pending Accounts List",
+        showIcon: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('users').where('status', isEqualTo: 'pending').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(); // Show loading indicator while fetching data
+            return Center(child: const CircularProgressIndicator()); // Show loading indicator while fetching data
           }
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}'); // Show error message if any

@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easytransit_admin/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import '../common_widgets/common_appbar.dart';
 import 'pending_driver_rides.dart';
-import 'pending_users.dart';
+import 'pending_accounts_list.dart';
 
 class DashBoardPage extends StatelessWidget {
   const DashBoardPage({super.key});
@@ -14,20 +13,21 @@ class DashBoardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Dashboard Page"),
+      appBar: CommonAppBar(
+        title: "Dashboard Page",
+        showIcon: false,
         actions: [
           IconButton(
             onPressed: () {
               AuthService.logout();
             },
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),
       body: Container(
         width: double.infinity,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,9 +47,10 @@ class DashBoardPage extends StatelessWidget {
                         color: Colors.white24,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text(
-                        "Pending Users List",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                      child: const Text(
+                        "Pending Accounts List",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -70,7 +71,8 @@ class DashBoardPage extends StatelessWidget {
                       ),
                       child: const Text(
                         "Pending Driver Rides",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       ),
                     ),
