@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easytransit_admin/common_widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 
 class PendingDriverRides extends StatelessWidget {
-  const PendingDriverRides({Key? key}) : super(key: key);
+  const PendingDriverRides({super.key});
 
   static const String routeName = 'pending-driver-rides';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Pending Driver Rides"),
+      appBar: CommonAppBar(
+        title: "Pending Driver Rides",
+        showIcon: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -38,34 +39,73 @@ class PendingDriverRides extends StatelessWidget {
           }
 
           return ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             itemCount: users.length,
             itemBuilder: (context, index) {
               final userData = users[index].data() as Map<String, dynamic>;
               final userId = users[index].id;
               final name = userData['name'] ?? 'Unknown';
               final phoneNumber = userData['phoneNumber'] ?? 'Unknown';
+              final vehicleName = userData['vehicleName'] ?? 'Unknown';
+              final vehicleNo = userData['vehicleNo'] ?? 'Unknown';
 
-              return ListTile(
-                title: Text(name),
-                subtitle: Text(phoneNumber),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        approveUser(userId);
-                      },
-                      icon: Icon(Icons.check),
-                      color: Colors.green,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        rejectUser(userId);
-                      },
-                      icon: Icon(Icons.close),
-                      color: Colors.red,
-                    ),
-                  ],
+              return Material(
+                elevation: 2.0,
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            name,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            phoneNumber,
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            "Vehicle Name: $vehicleName",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            "Vehicle Number: $vehicleNo",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              approveUser(userId);
+                            },
+                            icon: Icon(Icons.check),
+                            color: Colors.green,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              rejectUser(userId);
+                            },
+                            icon: Icon(Icons.close),
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -83,9 +123,6 @@ class PendingDriverRides extends StatelessWidget {
   }
 
   void rejectUser(String userId) {
-    FirebaseFirestore.instance
-        .collection('driverDetails')
-        .doc(userId)
-        .delete();
+    FirebaseFirestore.instance.collection('driverDetails').doc(userId).delete();
   }
 }
