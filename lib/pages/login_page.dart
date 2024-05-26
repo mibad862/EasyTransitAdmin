@@ -1,3 +1,4 @@
+import 'package:easytransit_admin/common_widgets/common_elevated_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -7,6 +8,7 @@ import 'dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
+
   const LoginPage({super.key});
 
   @override
@@ -18,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   String _errMsg = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +37,15 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none
+                    ),
                     filled: true,
                     prefixIcon: Icon(Icons.email),
                     labelText: 'Email Address',
                   ),
                   validator: (value) {
-                    if(value == null || value.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Provide a valid email address';
                     }
                     return null;
@@ -52,25 +58,39 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                   controller: _passwordController,
                   decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none
+                    ),
                     filled: true,
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.key),
                     labelText: 'Password (at least 6 characters)',
                   ),
                   validator: (value) {
-                    if(value == null || value.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return 'Provide a valid password';
                     }
                     return null;
                   },
                 ),
               ),
-              ElevatedButton(
+              SizedBox(height: 10),
+              CommonElevatedButton(
+                borderRadius: 15.0,
+                buttonElevation: 2.0,
+                fontSize: 15,
+                textColor: Colors.black,
+                buttonColor: Colors.amber,
+                width: double.infinity,
+                height: 48,
                 onPressed: _authenticate,
-                child: const Text('Login as Admin'),
+                text: "Login as Admin",
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(_errMsg, style: const TextStyle(fontSize: 18, color: Colors.red),),
+                child: Text(
+                  _errMsg,
+                  style: const TextStyle(fontSize: 18, color: Colors.red),
+                ),
               )
             ],
           ),
@@ -87,14 +107,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _authenticate() async {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       EasyLoading.show(status: 'Please wait');
       final email = _emailController.text;
       final pass = _passwordController.text;
       try {
         final status = await AuthService.loginAdmin(email, pass);
         EasyLoading.dismiss();
-        if(status) {
+        if (status) {
           context.goNamed(DashBoardPage.routeName);
         } else {
           await AuthService.logout();
@@ -102,8 +122,7 @@ class _LoginPageState extends State<LoginPage> {
             _errMsg = 'This is not an Admin account';
           });
         }
-
-      } on FirebaseAuthException catch(error) {
+      } on FirebaseAuthException catch (error) {
         EasyLoading.dismiss();
         setState(() {
           _errMsg = error.message!;
