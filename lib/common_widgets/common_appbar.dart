@@ -16,14 +16,15 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      actions: actions, // using provided actions or null
+      actions: actions,
+      // using provided actions or null
       leading: showIcon
           ? IconButton(
-        icon: const Icon(Icons.arrow_back_outlined),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      )
+              icon: const Icon(Icons.arrow_back_outlined),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
           : null,
       title: Text(title),
       backgroundColor: Colors.yellow,

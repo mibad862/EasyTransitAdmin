@@ -38,9 +38,10 @@ class PendingDriverProfiles extends StatelessWidget {
             ); // Show message if there are no pending users
           }
 
-          return ListView.builder(
+          return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             itemCount: users.length,
+            separatorBuilder: (context,index) => SizedBox(height: 10),
             itemBuilder: (context, index) {
               final userData = users[index].data() as Map<String, dynamic>;
               final userId = users[index].id;
