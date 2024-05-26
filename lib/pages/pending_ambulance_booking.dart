@@ -3,7 +3,7 @@ import 'package:easytransit_admin/common_widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 
 class PendingAmbulanceBooking extends StatelessWidget {
-  PendingAmbulanceBooking({super.key});
+  const PendingAmbulanceBooking({super.key});
 
   static const String routeName = 'pending-ambulance-booking';
 
