@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:easytransit_admin/common_widgets/common_appbar.dart';
+import 'package:flutter/material.dart';
 
 class PendingAmbulanceBooking extends StatelessWidget {
   PendingAmbulanceBooking({super.key});
@@ -36,9 +35,10 @@ class PendingAmbulanceBooking extends StatelessWidget {
             );
           }
 
-          return ListView.builder(
+          return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             itemCount: users.length,
+            separatorBuilder: (context,index) => SizedBox(height: 8),
             itemBuilder: (context, index) {
               final userId = users[index].id;
 
@@ -67,6 +67,7 @@ class PendingAmbulanceBooking extends StatelessWidget {
                   }
 
                   final name = bookingData['name'] ?? 'Unknown';
+                  final phoneNumber = bookingData['phoneNumber'] ?? 'Unknown';
                   final location = bookingData['location'] ?? 'Unknown';
                   final time = bookingData['time'] ?? 'Unknown';
                   final date = (bookingData['date'] as Timestamp).toDate(); // Convert Timestamp to DateTime
@@ -92,12 +93,22 @@ class PendingAmbulanceBooking extends StatelessWidget {
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
                               Text(
+                                phoneNumber,
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
                                 location,
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w400),
                               ),
                               Text(
                                 "Time: $time",
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "Date: $date",
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w400),
                               ),
