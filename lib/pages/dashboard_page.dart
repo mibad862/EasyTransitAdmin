@@ -2,6 +2,7 @@ import 'package:easytransit_admin/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../common_widgets/common_appbar.dart';
+import 'login_page.dart';
 import 'pending_ambulance_booking.dart';
 import 'pending_driver_profiles.dart';
 import 'pending_accounts_list.dart';
@@ -21,6 +22,7 @@ class DashBoardPage extends StatelessWidget {
           IconButton(
             onPressed: () {
               AuthService.logout();
+              context.goNamed(LoginPage.routeName);
             },
             icon: const Icon(Icons.logout),
           ),
