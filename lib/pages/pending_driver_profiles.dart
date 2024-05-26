@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easytransit_admin/common_widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 
-class PendingDriverRides extends StatelessWidget {
-  const PendingDriverRides({super.key});
+class PendingDriverProfiles extends StatelessWidget {
+  const PendingDriverProfiles({super.key});
 
   static const String routeName = 'pending-driver-rides';
 
@@ -11,7 +11,7 @@ class PendingDriverRides extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar(
-        title: "Pending Driver Rides",
+        title: "Pending Driver Profiles",
         showIcon: true,
       ),
       body: StreamBuilder<QuerySnapshot>(

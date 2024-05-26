@@ -5,7 +5,8 @@ import 'auth/auth_service.dart';
 import 'firebase_options.dart';
 import 'pages/dashboard_page.dart';
 import 'pages/login_page.dart';
-import 'pages/pending_driver_rides.dart';
+import 'pages/pending_ambulance_booking.dart';
+import 'pages/pending_driver_profiles.dart';
 import 'pages/pending_accounts_list.dart';
 
 void main() async{
@@ -52,9 +53,14 @@ class MyApp extends StatelessWidget {
               builder: (context, state) => const PendingUsers(),
             ),
             GoRoute(
-              name: PendingDriverRides.routeName,
-              path: PendingDriverRides.routeName,
-              builder: (context, state) => const PendingDriverRides(),
+              name: PendingDriverProfiles.routeName,
+              path: PendingDriverProfiles.routeName,
+              builder: (context, state) => const PendingDriverProfiles(),
+            ),
+            GoRoute(
+              name: PendingAmbulanceBooking.routeName,
+              path: PendingAmbulanceBooking.routeName,
+              builder: (context, state) =>  PendingAmbulanceBooking(),
             ),
             // GoRoute(
             //     name: ViewTelescopePage.routeName,
