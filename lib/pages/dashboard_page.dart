@@ -2,7 +2,8 @@ import 'package:easytransit_admin/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../common_widgets/common_appbar.dart';
-import 'pending_driver_rides.dart';
+import 'pending_ambulance_booking.dart';
+import 'pending_driver_profiles.dart';
 import 'pending_accounts_list.dart';
 
 class DashBoardPage extends StatelessWidget {
@@ -41,7 +42,7 @@ class DashBoardPage extends StatelessWidget {
                     onTap: () => context.goNamed(PendingUsers.routeName),
                     child: Container(
                       alignment: Alignment.center,
-                      width: 140,
+                      width: 145,
                       height: 140,
                       decoration: BoxDecoration(
                         color: Colors.white24,
@@ -60,17 +61,45 @@ class DashBoardPage extends StatelessWidget {
                   elevation: 2.0,
                   borderRadius: BorderRadius.circular(10),
                   child: GestureDetector(
-                    onTap: () => context.goNamed(PendingDriverRides.routeName),
+                    onTap: () => context.goNamed(PendingDriverProfiles.routeName),
                     child: Container(
                       alignment: Alignment.center,
-                      width: 140,
+                      width: 145,
                       height: 140,
                       decoration: BoxDecoration(
                         color: Colors.white24,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Text(
-                        "Pending Driver Rides",
+                        "Pending Driver Profiles",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Material(
+                  elevation: 2.0,
+                  borderRadius: BorderRadius.circular(10),
+                  child: GestureDetector(
+                    onTap: () => context.goNamed(PendingAmbulanceBooking.routeName),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 145,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        color: Colors.white24,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "Pending Ambulance Booking",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
